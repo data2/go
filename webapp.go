@@ -6,6 +6,7 @@ import (
 )
 
 func webfun(w http.ResponseWriter, r *http.Request) {
+	r.ParseForm()
 	fmt.Fprint(w, "开启go web")
 }
 
