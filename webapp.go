@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 )
 
@@ -17,8 +18,17 @@ func webfun(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func name(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("./templates/index.html")
+	data := map[string]string{
+		"name": "data2",
+	}
+	t.Execute(w, data)
+}
+
 func main() {
 	http.HandleFunc("/", webfun)
+	http.HandleFunc("/name", name)
 	fmt.Println("服务启动")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
